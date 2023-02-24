@@ -218,8 +218,9 @@ function Home() {
         })
     gui.add( settings, 'shadowMapSize', 0, 12000, 200 )
         .onChange( (value: number) => {
-            directionalLight.shadow.map.dispose(); // important
             directionalLight.shadow.mapSize = new THREE.Vector2(value,value)
+            directionalLight.shadow.map.dispose(); // important
+            directionalLight.shadow.map = null!; //don't know if the ! was a good idea, was getting "Type 'null' is not assignable to type 'WebGLRenderTarget'."
         })
 
     gui.add( settings, 'shadowRadius', 0, 100, 1 )
