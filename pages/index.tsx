@@ -34,7 +34,7 @@ function Home() {
     );
 
     const renderer = new THREE.WebGLRenderer({
-      canvas: document.querySelector("#bg"),
+      canvas: document.querySelector("#bg") as HTMLElement,
       antialias: true
     });
 
@@ -42,7 +42,8 @@ function Home() {
 
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
-    camera.position.set(10, 2, 0);
+    camera.position.set(30, 17.5, -30);
+    
     renderer.render(scene, camera);
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.shadowMap.enabled = true;
@@ -73,7 +74,7 @@ function Home() {
       var newMaterial = new THREE.MeshStandardMaterial({color: 0xffffff});
 
       room.traverse((child) => {
-        if (child.isMesh) {
+        if (child instanceof THREE.Mesh && child.isMesh) {
           child.material = newMaterial;
           child.castShadow = true
           child.receiveShadow = true
